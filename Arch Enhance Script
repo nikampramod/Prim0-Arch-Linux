@@ -1,0 +1,39 @@
+#!/bin/sh
+# For KDE Plasma
+# 1. Disable baloo
+balooctl disable
+sudo balooctl disable
+
+# 2. Remove baloo created folder
+rm -rf ~/.local/share/baloo
+sudo rm -rf ~/.local/share/baloo
+
+# 3. Disable Lightdm services (if installed through Calam Arch Installer)
+systemctl disable lightdm
+
+# 4. Enable SDDM Services (if installed through Calam Arch Installer)
+systemctl enable sddm
+
+# 5. Install basic applications (if KDE Applications not selected)
+sudo pacman -S dolphin-plugins filelight git gwenview kamoso kate kcalc konsole kompare nilfs-utils okular spectacle yakuake --needed
+
+# 6. Install Paru
+git clone https://aur.archlinux.org/paru.git && cd paru && makepkg -si
+
+# 7. Install needed applications
+paru -S p7zip acpi acpid apparmor appimagelauncher bleachbit dmidecode fwupd grub-customizer gsmartcontrol inxi skanlite spectre-meltdown-checker sshfs stacer udiskie vlc zoom brave-bin librewolf-bin aic94xx-firmware wd719x-firmware upd72020x-fw --needed
+# optimus-manager optimus-manager-qt (Add if NVIDIA GPU available)
+
+# 8. Enable needed setvices
+systemctl enable acpid apparmor bluetooth fwupd system76-power
+# optimus-manager (Add if NVIDIA GPU available)
+
+# 10. Remove Bloatware (execute only if selected "Kde applications")
+# sudo pacman -Rnc akregator artikulate blinken bomber bovo granatier juk kajongg kalarm kanagram kapman katomic kblackbox kblocks kbounce kbreakout kbruch kdiamond kfourinline kgeography kgoldrunner khangman kig kigo killbots kiriki kiten kjumpingcube klettres klickety klines kmahjongg kmines knavalbattle knetwalk knights kolf kollision konquest kpatience kreversi kshisen ksirk ksnakeduel kspaceduel ksquares ksudoku kteatime ktuberling kubrick kwordquiz lskat palapeli picmi
+
+# 11. Relevant for SSDs, uncomment line below only if the system has SSD
+systemctl enable fstrim.service fstrim.timer
+systemctl start fstrim.service fstrim.timer
+
+12. Final package list
+acpi acpid aic94xx-firmware alsa-firmware alsa-oss alsa-plugins alsa-utils android-tools anydesk-bin apparmor appimagelauncher appstream-glib arch-install-scripts archiso archlinux-appstream-data ark asciidoc auto-cpufreq autoconf automake b43-fwcutter base bash-completion bc bind bison bluedevil bluez-tools brave-bin breeze breeze-gtk broadcom-wl-dkms busybox cdrtools cpio crypto++ cryptsetup cups cups-pdf dbus-glib ddrescue device-mapper dhclient dhcpcd dialog diffutils discover dmidecode dnsmasq dolphin dolphin-plugins drkonqi e2fsprogs ecryptfs-utils efibootmgr efitools ethtool exfat-utils f2fs-tools fakeroot ffmpeg ffmpegthumbnailer filelight flatpak flex foomatic-db foomatic-db-engine foomatic-db-gutenprint-ppds foomatic-db-nonfree foomatic-db-nonfree-ppds foomatic-db-ppds freedownloadmanager fsarchiver fwupd gcc gimp git gnu-free-fonts gnu-netcat gobject-introspection gpart gparted grub grub-customizer gsmartcontrol gsound gst-libav gst-plugins-bad gst-plugins-ugly gstreamer gutenprint gvfs gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb gwenview hplip hwinfo inetutils intel-ucode inxi ipw2100-fw ipw2200-fw itstool iwd jfsutils kactivitymanagerd kamoso kate kcalc kde-cli-tools kde-gtk-config kdeconnect kdecoration kdeplasma-addons kgamma5 khotkeys kinfocenter kmenuedit kompare konsole krename kscreen kscreenlocker ksshaskpass ksystemstats kwallet-pam kwayland-integration kwin kwrited layer-shell-qt less lib32-alsa-lib lib32-alsa-plugins lib32-giflib lib32-gnutls lib32-gst-plugins-base-libs lib32-gtk3 lib32-libgcrypt lib32-libgpg-error lib32-libjpeg-turbo lib32-libpng lib32-libpulse lib32-libva lib32-libxcomposite lib32-libxinerama lib32-libxslt lib32-mesa lib32-mpg123 lib32-nvidia-utils lib32-ocl-icd lib32-openal lib32-sqlite lib32-v4l-utils lib32-vulkan-icd-loader lib32-vulkan-intel libdvdcss libgsf libhandy libkscreen libksysguard libopenraw libpamac-aur libreoffice-fresh librewolf-bin libtool libva-intel-driver libva-vdpau-driver libvdpau-va-gl libwnck3 linux linux-atm linux-firmware linux-headers logrotate lsb-release lutris lvm2 lxsession m4 make man-db man-pages mdadm mesa-demos meson milou mkinitcpio mkinitcpio-busybox mkinitcpio-nfs-utils mlocate mobile-broadband-provider-info modem-manager-gui mousetweaks mtpfs nano ndisc6 neofetch net-snmp net-tools netctl networkmanager networkmanager-openconnect networkmanager-openvpn networkmanager-pptp networkmanager-vpnc nfs-utils nilfs-utils noto-fonts noto-fonts-cjk nss-mdns ntfs-3g nvidia nvidia-prime nvidia-settings obs-studio ocl-icd onlyoffice-bin optimus-manager optimus-manager-qt orca os-prober oxygen p7zip packagekit-qt5 pacman-contrib pamac-aur partimage paru patch pavucontrol perl pkgconf plasma-browser-integration plasma-desktop plasma-disks plasma-firewall plasma-integration plasma-nm plasma-pa plasma-sdk plasma-systemmonitor plasma-thunderbolt plasma-vault plasma-wayland-session plasma-workspace plasma-workspace-wallpapers polkit-kde-agent poppler-glib powerdevil pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseaudio-lirc pulseaudio-zeroconf pv reiserfsprogs rp-pppoe rsync s-nail sddm-kcm sdparm sg3_utils simplescreenrecorder skanlite smartmontools solid spectacle spectre-meltdown-checker splix sshfs stacer sudo sysfsutils system-config-printer systemd-sysvcompat systemd-ui systemsettings texinfo ttf-bitstream-vera ttf-caladea ttf-carlito ttf-croscore ttf-dejavu ttf-liberation ttf-ubuntu-font-family udiskie unrar unzip upd72020x-fw upower usb_modeswitch usbutils vala vi vlc vte3 vulkan-intel wd719x-firmware wget which whois wine-staging wireless-regdb wireless_tools wvdial xdg-desktop-portal-kde xdg-user-dirs xdg-user-dirs-gtk xf86-input-evdev xf86-input-synaptics xf86-video-fbdev xf86-video-nouveau xf86-video-vesa xfsprogs xl2tpd xorg-bdftopcf xorg-docs xorg-font-util xorg-fonts-100dpi xorg-fonts-75dpi xorg-iceauth xorg-mkfontscale xorg-server xorg-server-common xorg-server-devel xorg-server-xephyr xorg-server-xnest xorg-server-xvfb xorg-sessreg xorg-setxkbmap xorg-smproxy xorg-twm xorg-x11perf xorg-xauth xorg-xbacklight xorg-xclock xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev xorg-xgamma xorg-xhost xorg-xinit xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbutils xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo xorg-xwayland xorg-xwd xorg-xwininfo xorg-xwud xterm yakuake zip zoom
