@@ -1,11 +1,15 @@
 ## This is reference code. 
 #!/bin/sh
 # 1. Disable baloo
-balooctl disable
+balooctl6 suspend
+balooctl6 disable
+sudo balooctl6 suspend
 sudo balooctl disable
 
 # 2. Remove baloo created folder
+balooctl6 purge
 rm -rf ~/.local/share/baloo
+sudo balooctl6 purge
 sudo rm -rf ~/.local/share/baloo
 
 # 3. Disable Lightdm services
