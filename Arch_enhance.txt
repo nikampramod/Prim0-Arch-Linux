@@ -4,7 +4,7 @@
 balooctl6 suspend
 balooctl6 disable
 sudo balooctl6 suspend
-sudo balooctl disable
+sudo balooctl6 disable
 
 # 2. Remove baloo created folder
 balooctl6 purge
